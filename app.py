@@ -3,28 +3,43 @@ import numpy as np
 from transformers import BertTokenizer, BertForSequenceClassification
 import torch
 
+# Function to load the model and tokenizer
 @st.cache(allow_output_mutation=True)
 def get_model():
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
     model = BertForSequenceClassification.from_pretrained("asjadiiit/finetunedBert_toxiccom_class")
-    return tokenizer,model
+    return tokenizer, model
 
+# Load the tokenizer and model
+tokenizer, model = get_model()
 
-tokenizer,model = get_model()
+# Page title and description
+st.title("Toxic Comment Classification")
+st.markdown("This web application uses a fine-tuned BERT model to classify comments as toxic or non-toxic.")
 
+# User input and analyze button
 user_input = st.text_area('Enter Text to Analyze')
 button = st.button("Analyze")
 
-d = {
-    
-  1:'Toxic',
-  0:'Non Toxic'
+# Dictionary for class labels
+class_labels = {
+    1: 'Toxic',
+    0: 'Non-Toxic'
 }
 
-if user_input and button :
-    test_sample = tokenizer([user_input], padding=True, truncation=True, max_length=512,return_tensors='pt')
-    # test_sample
+if user_input and button:
+    # Tokenize and prepare the input
+    test_sample = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
+
+    # Make the prediction
     output = model(**test_sample)
-    st.write("Logits: ",output.logits)
-    y_pred = np.argmax(output.logits.detach().numpy(),axis=1)
-    st.write("Prediction: ",d[y_pred[0]])
+    logits = output.logits
+    probabilities = torch.softmax(logits, dim=1)
+    predicted_class = torch.argmax(probabilities).item()
+
+    # Display the prediction and probabilities
+    st.subheader("Prediction:")
+    st.write(class_labels[predicted_class])
+    st.subheader("Probability:")
+    st.write(f"Toxic: {probabilities[0][1]:.4f}")
+    st.write(f"Non-Toxic: {probabilities[0][0]:.4f}")
