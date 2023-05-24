@@ -4,7 +4,7 @@ from transformers import BertTokenizer, BertForSequenceClassification
 import torch
 
 # Function to load the model and tokenizer
-@st.cache(allow_output_mutation=True)
+@st.cache_data()
 def get_model():
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
     model = BertForSequenceClassification.from_pretrained("asjadiiit/finetunedBert_toxiccom_class")
@@ -39,7 +39,7 @@ if user_input and button:
 
     # Display the prediction and probabilities
     st.subheader("Prediction:")
-    st.write(class_labels[predicted_class])
+    st.success(class_labels[predicted_class])
     st.subheader("Probability:")
-    st.write(f"Toxic: {probabilities[0][1]:.4f}")
-    st.write(f"Non-Toxic: {probabilities[0][0]:.4f}")
+    st.success(f"Toxic: {probabilities[0][1]:.4f}")
+    st.success(f"Non-Toxic: {probabilities[0][0]:.4f}")
