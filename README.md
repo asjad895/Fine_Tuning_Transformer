@@ -26,3 +26,7 @@ The final trained model can be shared with the broader community by pushing it t
 The Hugging Face Model Hub is a platform that hosts a wide range of pre-trained models and allows users to discover, share, and use models in various NLP tasks.
 By pushing the model to the Hugging Face Model Hub, other researchers, developers, and NLP enthusiasts can access and utilize the model for their own projects.
 The Toxic Comment Classification project demonstrates the process of training a BERT-based model for toxic comment classification, evaluating its accuracy, deploying it on Streamlit for interactive use, and sharing the model with the community through the Hugging Face Model Hub. This project contributes to the development of effective tools for identifying and addressing toxic comments in various online platforms and social media channels.
+
+* [WebApp](https://asjad895-fine-tuning-transformer-app-5ftww8.streamlit.app/)
+* Demo
+
