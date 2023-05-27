@@ -29,4 +29,5 @@ The Toxic Comment Classification project demonstrates the process of training a 
 
 * [WebApp](https://asjad895-fine-tuning-transformer-app-5ftww8.streamlit.app/)
 * Demo
+[streamlit-app-Fine-Tune_bert.webm](https://github.com/asjad895/Fine_Tuning_Transformer/assets/109430048/dd598d07-a11f-4e1b-9390-cb9340c91b5d)
 
